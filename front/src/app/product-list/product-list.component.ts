@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
 
+import { Product } from '../products';
 import { ProductsService } from './products.service';
 
 @Component({
@@ -10,31 +11,34 @@ import { ProductsService } from './products.service';
 })
 export class ProductListComponent implements OnInit {
   
-  newProduct : any;
+  private newProduct : /*any*/Product;
 
-  products : [];
+  private products : Product[];
 
-  private productService: ProductsService
-
-  constructor() {
-    this.productService = new ProductsService();
-   }
+  constructor(private productService: ProductsService) {
+  }
 
   ngOnInit() {
-    this.newProduct = new Object();
+    this.newProduct = new /*Object*/Product();
     this.getProducts();
   }
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      this.productService.save(this.newProduct);
-      this.newProduct = new Object();
-      this.getProducts();
+//      this.productService.save(this.newProduct);
+      this.productService.createProduct(this.newProduct).subscribe(
+        id => {
+          this.newProduct = new /*Object*/Product();
+          this.getProducts();
+        }
+      );
     }
   }
 
   getProducts(): void {
-    this.products = this.productService.getProducts();
+    //this.products = this.productService.getProducts();
+    this.productService.getProducts().subscribe(
+      products => this.products = products);
   }
 
   share() {
