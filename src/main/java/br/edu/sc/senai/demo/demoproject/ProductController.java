@@ -29,10 +29,11 @@ final class ProductController {
 	}
 
 	private static ProductDTO toDTO(final ProductEntity productEntity) {
+		final Long id = productEntity.getProdctId();
 		final String name = productEntity.getName();
 		final String description = productEntity.getDescription();
 		final Double price = productEntity.getPrice();
-		return new ProductDTO(name, description, price);
+		return new ProductDTO(id, name, description, price);
 	}
 
 	List<ProductDTO> getAllProducts() {

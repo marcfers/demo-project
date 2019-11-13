@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 public final class ProductService {
 
 	private static final ProductDTO[] DEFAULT_PRODUCTS = new ProductDTO[] {
-			new ProductDTO("Phone XL", "A large phone with one of the best screens", Double.valueOf(799)),
-			new ProductDTO("Phone Mini", "A great phone with one of the best cameras", Double.valueOf(699)),
-			new ProductDTO("Phone Standard", "", Double.valueOf(299)) };
+			new ProductDTO(Long.valueOf(0), "Phone XL", "A large phone with one of the best screens", Double.valueOf(799)),
+			new ProductDTO(Long.valueOf(0), "Phone Mini", "A great phone with one of the best cameras", Double.valueOf(699)),
+			new ProductDTO(Long.valueOf(0), "Phone Standard", "", Double.valueOf(299)) };
 
 	private final ProductController productController;
 
