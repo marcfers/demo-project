@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { products, Product } from '../products';
+import { /*products,*/ Product } from '../products';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, share, publishReplay, refCount } from 'rxjs/internal/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
@@ -66,7 +66,7 @@ export class ProductsService {
 
   // HttpClient API put() method => Update product
   updateProduct(id, product): Observable<Product> {
-    return this.http.put<Product>(this.apiURL + '/products/' + id, JSON.stringify(product), this.httpOptions)
+    return this.http.put<Product>(this.apiURL + '/product/' + id, JSON.stringify(product), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -77,8 +77,9 @@ export class ProductsService {
   deleteProduct(id): Observable<Product> {
     return this.http.delete<Product>(this.apiURL + '/product/' + id, this.httpOptions)
     .pipe(
-      retry(1),
-      catchError(this.handleError)
+        //share()
+        publishReplay(1),
+        refCount()
     )
   }
 

@@ -5,5 +5,9 @@
   <h4>{{ product.price | currency }}</h4>
   <p>{{ product.description }}</p>
 
-  <button (click)="delete(product)">Delete</button>
+  <div>
+      <button (click)="back()">Back</button>
+      <button (click)="delete(product)" style="margin:5px;">Delete</button>
+    </div>
 </div>
+

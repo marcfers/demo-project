@@ -4,6 +4,7 @@ import { Location } from  '@angular/common';
 
 import { Product } from '../products';
 import { ProductsService } from '../product-list/products.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -30,12 +31,16 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
-  delete(product) {
-    if (confirm('Deseja realmente remover o produto ' + product.name + '?')) {  
-      this.productService.deleteProduct(product.id).subscribe(
-        retProduct => {
-          window.alert('Produto ' + retProduct.name + ' excluído!');
-          this._location.back();
+  back() {
+    this._location.back();
+  }
+
+  delete(productToRemove) {
+    if (confirm('Deseja realmente remover o produto "' + productToRemove.name + '"?')) {
+      this.productService.deleteProduct(productToRemove.id).subscribe(
+        product => {
+          window.alert('Produto "' + product.name + '" excluído!');
+          this.back();
         }
       );
     }
