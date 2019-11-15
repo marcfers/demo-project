@@ -4,7 +4,7 @@ public final class ProductDTO {
 
 	public static final ProductDTO NULL_VALUE = new ProductDTO(Long.valueOf(0), "", "", Double.valueOf(0.0));
 
-	private Long id;
+	private final Long id;
 	private final String name;
 	private final String description;
 	private final Double price;

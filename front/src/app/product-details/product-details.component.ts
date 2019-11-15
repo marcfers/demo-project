@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from  '@angular/common';
 
-import { Product } from '../products';
+import { /*products,*/ Product } from '../products';
 import { ProductsService } from '../product-list/products.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -23,23 +22,26 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      //this.product = products[+params.get('productId')];
-      let productId = +params.get('productId');
-      this.productService.getProduct(productId).subscribe(
-        product => this.product = product             
-      )
+      this.loadProduct(+params.get('productId'));
     });
+  }
+
+  loadProduct(productId: Number) {
+//    this.product = products[productId];
+    this.productService.getProduct(productId).subscribe(
+      product => this.product = product
+    );
   }
 
   back() {
     this._location.back();
   }
 
-  delete(productToRemove) {
+  delete(productToRemove: Product) {
     if (confirm('Deseja realmente remover o produto "' + productToRemove.name + '"?')) {
       this.productService.deleteProduct(productToRemove.id).subscribe(
         product => {
-          window.alert('Produto "' + product.name + '" excluído!');
+          window.alert('Produto "' + productToRemove.name + '" excluído!');
           this.back();
         }
       );

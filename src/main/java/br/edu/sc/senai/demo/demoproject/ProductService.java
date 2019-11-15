@@ -49,7 +49,7 @@ public final class ProductService {
 	public ResponseEntity<ProductDTO> removeProduct(@PathVariable final Long id) {
 		final ProductDTO removedProduct = this.productController.removeProduct(id);
 		if (removedProduct.equals(ProductDTO.NULL_VALUE)) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>(removedProduct, HttpStatus.OK);
 	}

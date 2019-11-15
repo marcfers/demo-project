@@ -74,12 +74,15 @@ export class ProductsService {
   }
 
   // HttpClient API delete() method => Delete product
-  deleteProduct(id): Observable<Product> {
-    return this.http.delete<Product>(this.apiURL + '/product/' + id, this.httpOptions)
+  deleteProduct(id: Number): Observable<Product> {
+    const url = `${this.apiURL}/product/${id}`
+    return this.http.delete<Product>(url, this.httpOptions)
     .pipe(
-        //share()
-        publishReplay(1),
-        refCount()
+      retry(1),
+      catchError(this.handleError),
+      share(),
+        //publishReplay(1),
+        //refCount()
     )
   }
 
