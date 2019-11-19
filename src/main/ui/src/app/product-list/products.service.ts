@@ -22,7 +22,7 @@ export class ProductsService {
   }*/
 
   // Define API
-  apiURL = 'http://localhost:8080';
+  apiURL = '/api/v1';
 
   constructor(private http: HttpClient) { }
 
